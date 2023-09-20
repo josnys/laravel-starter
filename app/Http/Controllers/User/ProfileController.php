@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use Domains\User\Actions\UpdateProfileAction;
 use Domains\User\Services\ProfileService;
@@ -30,7 +33,7 @@ class ProfileController extends Controller
 
         $data = (new UpdateProfileAction())->handle($input->toArray(), $request->user());
 
-        return redirect()->route('profile.edit')->with('success', 'Profile modified successfully.');
+        return redirect()->route('user.profile.edit')->with('success', 'Profile modified successfully.');
     }
 
     public function destroy(Request $request): RedirectResponse
