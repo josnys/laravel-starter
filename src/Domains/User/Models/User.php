@@ -7,6 +7,7 @@ namespace Domains\User\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Database\Factories\UserFactory;
+use Domains\User\Models\Concerns\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +18,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasFactory;
+    use HasPermissionsTrait;
     use HasApiTokens;
 
     protected $fillable = [

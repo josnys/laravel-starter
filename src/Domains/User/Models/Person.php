@@ -9,6 +9,7 @@ use Domains\User\Models\Concerns\HasCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class Person extends Model
 {
@@ -37,6 +38,16 @@ class Person extends Model
     public function user() : HasOne
     {
         return $this->hasOne(User::class, 'person_id');
+    }
+
+    public function getSmallAvatarAttribute(): string | null
+    {
+        return ($this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url)) ? route('show.image', 'users/thumbnails/' . $this->profile_url) : null;
+    }
+
+    public function getLargeAvatarAttribute(): string | null
+    {
+        return ($this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url)) ? route('show.image', 'users/' . $this->profile_url) : null;
     }
 
     protected static function newFactory()
