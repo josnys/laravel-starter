@@ -36,6 +36,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob' => 'datetime',
         'password' => 'hashed',
         'is_active' => 'boolean',
         'is_banned' => 'boolean'

@@ -7,7 +7,7 @@ use App\Http\Controllers\User\UserToAdminController;
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'verified']], function () {
      Route::get('/dashboard', DashboardController::class)->name('dashboard');
-     Route::get('admin', UserToAdminController::class)->name('to.admin');
+     Route::get('to-admin', UserToAdminController::class)->name('to.admin');
 
      // Profile
      Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

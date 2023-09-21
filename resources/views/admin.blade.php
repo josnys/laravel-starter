@@ -12,7 +12,7 @@
      <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
      <!-- Scripts -->
-     @routes('admin')
+     @routes(['admin'])
      @viteReactRefresh
      @vite(['resources/js/admin.jsx', "resources/js/Pages/{$page['component']}.jsx"])
      @inertiaHead
