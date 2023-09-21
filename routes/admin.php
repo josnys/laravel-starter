@@ -9,8 +9,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
      Route::get('/dashboard', DashboardController::class)->name('dashboard');
      Route::get('/to-user', AdminToUserController::class)->name('to.user');
 
-     Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
+     Route::group(['prefix' => 'users', 'as' => 'user.'], function(){
           Route::get('/', [UserController::class, 'index'])->name('index');
+          Route::get('/{user:username}/edit', [UserController::class, 'edit'])->name('edit');
+          Route::patch('/{user:username}/edit', [UserController::class, 'update'])->name('update');
      });
 });
 

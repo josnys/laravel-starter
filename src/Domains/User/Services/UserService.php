@@ -14,4 +14,9 @@ final class UserService
      {
           return UserResource::collection(User::with('person')->paginate(50));
      }
+
+     public function getByUsername(string $username) : UserResource
+     {
+          return new UserResource(User::with('person')->where('username', $username)->first());
+     }
 }

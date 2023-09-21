@@ -17,7 +17,9 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'related' => [
                 'person' => PersonResource::make($this->whenLoaded('person'))
-            ]
+            ],
+            'suspended' => $this->is_suspended,
+            'banned' => $this->is_banned
         ];
     }
 }

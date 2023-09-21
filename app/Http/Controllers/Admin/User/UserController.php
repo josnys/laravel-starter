@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\UpdateUserRequest;
+use Domains\User\Actions\UpdateUserAction;
+use Domains\User\Models\User;
 use Domains\User\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -34,23 +38,27 @@ class UserController extends Controller
         //
     }
 
-    public function show(string $id)
+    public function show(User $username) : Response
     {
-        //
+        return Inertia::render("{$this->base_path}/Form", ['info' => ['user' => (new UserService())->getByUsername($username->username)]]);
     }
 
-    public function edit(string $id)
+    public function edit(User $user): Response
     {
-        //
+        return Inertia::render("{$this->base_path}/Form", ['info' => ['user' => (new UserService())->getByUsername($user->username)]]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user) : RedirectResponse
     {
-        //
+        $input = $request->payload();
+
+        $user = (new UpdateUserAction())->handle($input->toArray(), $user);
+
+        return redirect()->route('admin.user.index')->with('success', 'User modified successfully.');
     }
 
-    public function destroy(string $id)
+    public function destroy(User $user) : RedirectResponse
     {
-        //
+        return redirect()->route('admin.user.index')->with('success', 'User deleted successfully.');
     }
 }

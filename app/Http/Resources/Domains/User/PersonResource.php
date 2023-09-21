@@ -18,7 +18,6 @@ class PersonResource extends JsonResource
             'lastname' => $this->lastname,
             'fullname' => "{$this->firstname} {$this->lastname}",
             'dob' => $this->dob,
-            // 'dob_display' => $this->dob->format('M d, Y'),
             'bio' => $this->bio,
             'address' => $this->address,
             'phone' => $this->phone,
