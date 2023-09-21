@@ -18,8 +18,8 @@ export default function Form({ auth }) {
           lastname: user.related.person.lastname || '',
           dob: user.related.person.dob || '',
           bio: user.related.person.bio || '',
-          suspended: user.suspended || false,
-          banned: user.banned || false
+          suspended: user.status.suspended.value || false,
+          banned: user.status.banned.value || false
      });
 
      const submit = (e) => {

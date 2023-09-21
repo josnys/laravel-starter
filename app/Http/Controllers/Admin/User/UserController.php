@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index(Request $request) : Response
     {
         return Inertia::render("{$this->base_path}/Index", ['info' => [
-            'header' => ['Code', 'Name', 'Username', 'E-mail', ''],
+            'header' => ['Code', 'Name', 'Username', 'E-mail', 'Status', ''],
             'users' => (new UserService())->getAllPaginate(50),
         ]]);
     }

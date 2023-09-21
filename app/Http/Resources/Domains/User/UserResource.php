@@ -18,8 +18,10 @@ class UserResource extends JsonResource
             'related' => [
                 'person' => PersonResource::make($this->whenLoaded('person'))
             ],
-            'suspended' => $this->is_suspended,
-            'banned' => $this->is_banned
+            'status' => [
+                'suspended' => ['value' => $this->is_suspended, 'text' => $this->is_suspended ? 'Suspended' : 'Not Suspended'],
+                'banned' => ['value' => $this->is_banned, 'text' => $this->is_banned ? 'Banned' : 'Not Ban'],
+            ]
         ];
     }
 }

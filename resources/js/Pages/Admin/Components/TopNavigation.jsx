@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
+import Icon from "@/Components/Icon";
 
 export default ({user }) => {
      const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -36,19 +37,7 @@ export default ({user }) => {
                                                   className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out bg-white border border-transparent rounded-md text-slate-500 hover:text-slate-700 focus:outline-none"
                                              >
                                                   {user.name}
-
-                                                  <svg
-                                                       className="ml-2 -mr-0.5 h-4 w-4"
-                                                       xmlns="http://www.w3.org/2000/svg"
-                                                       viewBox="0 0 20 20"
-                                                       fill="currentColor"
-                                                  >
-                                                       <path
-                                                            fillRule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clipRule="evenodd"
-                                                       />
-                                                  </svg>
+                                                  <Icon name={'chevron-down'} className={'ml-2 -mr-0.5 h-4 w-4'} />
                                              </button>
                                         </span>
                                    </Dropdown.Trigger>
