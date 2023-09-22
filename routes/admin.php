@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminToUserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\User\AssignRolePermissionController;
 use App\Http\Controllers\Admin\User\ChangeUserPasswordController;
 use App\Http\Controllers\Admin\User\PermissionController;
 use App\Http\Controllers\Admin\User\RoleController;
@@ -22,6 +23,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
           Route::get('/', [RoleController::class, 'index'])->name('index');
           Route::post('/create', [RoleController::class, 'store'])->name('store');
           Route::patch('/{role:slug}/edit', [RoleController::class, 'update'])->name('update');
+          Route::get('/{role:slug}/permission', [AssignRolePermissionController::class, 'create'])->name('permission.create');
+          Route::post('/{role:slug}/permission', [AssignRolePermissionController::class, 'store'])->name('permission.store');
      });
 
      Route::group(['prefix' => 'users', 'as' => 'user.'], function(){

@@ -42,7 +42,7 @@ export default function Index({ auth }) {
           >
                <Head title="Dashboard" />
 
-               <section className="w-full">
+               <section className="w-full h-full overflow-visible">
                     <div className="p-4 overflow-hidden bg-white">
                          <div className="w-full col-span-12">
                               <div className="p-2 mb-2 rounded bg-slate-50">
@@ -73,6 +73,9 @@ export default function Index({ auth }) {
                                                             <Dropdown.Link href="#" onClick={(e) => handleEditModal(e, role)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'edit'} />Edit
                                                             </Dropdown.Link>
+                                                            <Dropdown.Link href={route('admin.role.permission.create', role.slug)}>
+                                                                 <Icon className={`mr-2 w-4 h-4`} name={'key'} />Assign Permissions
+                                                            </Dropdown.Link>
                                                        </Dropdown.Content>
                                                   </Dropdown>
                                              </DataTableItem>
@@ -83,7 +86,7 @@ export default function Index({ auth }) {
                     </div>
                     <Modal show={data.openModal}>
                          <h2 className="p-4 text-lg font-medium text-gray-900">
-                              Create Permission
+                              Create Role
                          </h2>
 
                          <Form formSuccess={toggleModal} roleData={data.role} />
