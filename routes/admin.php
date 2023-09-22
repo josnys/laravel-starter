@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminToUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\User\AssignRolePermissionController;
+use App\Http\Controllers\Admin\User\AssignUserRoleController;
 use App\Http\Controllers\Admin\User\ChangeUserPasswordController;
 use App\Http\Controllers\Admin\User\PermissionController;
 use App\Http\Controllers\Admin\User\RoleController;
@@ -35,6 +36,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
           // Password Change
           Route::get('/{user:username}/password', [ChangeUserPasswordController::class, 'edit'])->name('password.edit');
           Route::patch('/{user:username}/password', [ChangeUserPasswordController::class, 'update'])->name('password.update');
+
+          // Assign Roles
+          Route::get('/{user:username}/role', [AssignUserRoleController::class, 'create'])->name('role.create');
+          Route::post('/{user:username}/role', [AssignUserRoleController::class, 'store'])->name('role.store');
      });
 });
 
