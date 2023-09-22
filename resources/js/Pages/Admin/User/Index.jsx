@@ -34,7 +34,8 @@ export default function Index({ auth }) {
                                              </Dropdown.Trigger>
 
                                              <Dropdown.Content>
-                                                  <Dropdown.Link href={route('admin.user.index')}>Permissions</Dropdown.Link>
+                                                  <Dropdown.Link href={route('admin.permission.index')}>Permissions</Dropdown.Link>
+                                                  <Dropdown.Link href={route('admin.role.index')}>Roles</Dropdown.Link>
                                              </Dropdown.Content>
                                         </Dropdown>
                                    </div>

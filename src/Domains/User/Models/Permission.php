@@ -12,6 +12,17 @@ class Permission extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'display_name',
+        'slug',
+        'description',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
     public function roles() : BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'roles_permissions');
