@@ -26,7 +26,8 @@ class PermissionController extends Controller
     {
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Name', 'Slug', 'Status', ''],
-            'permissions' => (new AuthorizationService())->getAllPermissionPaginate(50)
+            'permissions' => (new AuthorizationService())->getAllPermissionPaginate(50),
+            'can' => Permission::userAccess()
         ]]);
     }
 

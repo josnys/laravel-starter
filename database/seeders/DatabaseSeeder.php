@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call([
+            InitialSeeder::class
+        ]);
+        
         User::factory(5)->create();
-        // Person::factory()->create();
     }
 }

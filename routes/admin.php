@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'can:admin-access']], function(){
      Route::get('/dashboard', DashboardController::class)->name('dashboard');
      Route::get('/to-user', AdminToUserController::class)->name('to.user');
 

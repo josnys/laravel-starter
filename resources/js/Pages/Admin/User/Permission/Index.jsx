@@ -47,7 +47,7 @@ export default function Index({ auth }) {
                          <div className="w-full col-span-12">
                               <div className="p-2 mb-2 rounded bg-slate-50">
                                    <div className="flex justify-end">
-                                        <AddButton link="#" onClick={handleModal}>Add New</AddButton>
+                                        {info.can.add_new ? <AddButton link="#" onClick={handleModal}>Add New</AddButton> : null}
                                    </div>
                               </div>
                               <DataTable header={info.header} showNoData={permissions.length}>
@@ -57,7 +57,7 @@ export default function Index({ auth }) {
                                              <DataTableItem>{permission.slug}</DataTableItem>
                                              <DataTableItem>{permission.status.text}</DataTableItem>
                                              <DataTableItem>
-                                                  <Dropdown>
+                                                  {info.can.edit  ? <Dropdown>
                                                        <Dropdown.Trigger>
                                                             <span className="inline-flex rounded-md">
                                                                  <button
@@ -74,7 +74,7 @@ export default function Index({ auth }) {
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'edit'} />Edit
                                                             </Dropdown.Link>
                                                        </Dropdown.Content>
-                                                  </Dropdown>
+                                                  </Dropdown> : null}
                                              </DataTableItem>
                                         </tr>
                                    })}

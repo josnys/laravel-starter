@@ -1,16 +1,16 @@
 import React from 'react';
 
 const TableHeader = (header) => {
-     return (<thead className="bg-slate-200">
+     return (<thead className={`bg-slate-200`}>
           <tr>
                {header.captions.map((caption, i) => {
-                    return <th key={i} className="px-2 py-1">{caption}</th>
+                    return <th key={i} className={`px-2 py-1`}>{caption}</th>
                })}
           </tr>
      </thead>)
 }
 
-export default ({ header, showNoData, ...props }) => {
+export default ({ header, headerClass, showNoData, ...props }) => {
      return (
           <table className="w-full col-span-12 text-sm table-fixed">
                <TableHeader captions={header} />

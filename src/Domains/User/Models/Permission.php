@@ -38,4 +38,12 @@ class Permission extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public static function userAccess(): array
+    {
+        return [
+            'add_new' => request()->user()->can('create-permission'),
+            'edit' => request()->user()->can('update-permission'),
+        ];
+    }
 }

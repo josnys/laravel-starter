@@ -38,4 +38,13 @@ class Role extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public static function userAccess(): array
+    {
+        return [
+            'add_new' => request()->user()->can('create-role'),
+            'edit' => request()->user()->can('update-role'),
+            // 'add_permissions' => request()->user()->can(''),
+        ];
+    }
 }

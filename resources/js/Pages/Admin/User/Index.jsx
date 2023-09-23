@@ -41,13 +41,16 @@ export default function Index({ auth }) {
                                    </div>
                               </div>
                               <DataTable header={info.header} showNoData={users.length}>
-                                   {users.map(({ id, username, email, related, status }, i) => {
+                                   {users.map(({ username, email, related, status }, i) => {
                                         return <tr key={`usr${i}`} className="hover:bg-slate-50">
                                              <DataTableItem>{related.person.code}</DataTableItem>
                                              <DataTableItem>{related.person.fullname}</DataTableItem>
                                              <DataTableItem>{username}</DataTableItem>
                                              <DataTableItem>{email}</DataTableItem>
-                                             <DataTableItem>{status.suspended.text} / {status.banned.text}</DataTableItem>
+                                             <DataTableItem>{related.roles}</DataTableItem>
+                                             <DataTableItem>
+                                                  <span className={`${!status.suspended.value ? 'text-green-700' : 'text-red-700'}`}>{status.suspended.text}</span> / <span className={`${!status.banned.value ? 'text-green-700' : 'text-red-700'}`}>{status.banned.text}</span>
+                                             </DataTableItem>
                                              <DataTableItem>
                                                   <Dropdown>
                                                        <Dropdown.Trigger>

@@ -3,9 +3,10 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function User({ user, header, children }) {
+     const { auth } = usePage().props;
      const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
      return (
@@ -57,7 +58,7 @@ export default function User({ user, header, children }) {
 
                                              <Dropdown.Content>
                                                   <Dropdown.Link href={route('user.profile.edit')}>Profile</Dropdown.Link>
-                                                  <Dropdown.Link href={route('user.to.admin')}>Administration</Dropdown.Link>
+                                                  {auth.can.admin_panel ? <Dropdown.Link href={route('user.to.admin')}>Administration</Dropdown.Link> : null}
                                                   <Dropdown.Link href={route('logout')} method="post" as="button">
                                                        Log Out
                                                   </Dropdown.Link>

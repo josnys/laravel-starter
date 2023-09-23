@@ -16,7 +16,8 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'related' => [
-                'person' => PersonResource::make($this->whenLoaded('person'))
+                'person' => PersonResource::make($this->whenLoaded('person')),
+                'roles' => $this->whenLoaded('roles') ? $this->roles->pluck('display_name')->join(', ') : null
             ],
             'status' => [
                 'suspended' => ['value' => $this->is_suspended, 'text' => $this->is_suspended ? 'Suspended' : 'Not Suspended'],
