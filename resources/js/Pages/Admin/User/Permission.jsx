@@ -5,36 +5,36 @@ import Checkbox from '@/Components/Checkbox';
 import FlashMessage from '@/Components/FlashMessage';
 import CancelButton from '@/Components/CancelButton';
 
-export default function Role({ auth }) {
+export default function Permission({ auth }) {
      const { info } = usePage().props;
      const user = info.user.data;
-     console.log(user);
+
      const { data, setData, post, errors, processing } = useForm({
-          roles: info.roles || []
+          permissions: info.permissions || []
      });
 
      const handleChange = (e, i) => {
           e.preventDefault();
-          let roles = data.roles;
-          let role = roles[i];
-          role.is_checked = !role.is_checked;
-          roles[i] = role;
+          let permissions = data.permissions;
+          let permission = permissions[i];
+          permission.is_checked = !permission.is_checked;
+          permissions[i] = permission;
           setData((data) => ({
                ...data,
-               roles: roles
+               permissions: permissions
           }));
      }
 
      const submit = (e) => {
           e.preventDefault();
 
-          post(route('admin.user.role.store', user.username));
+          post(route('admin.user.permission.store', user.username));
      };
 
      return (
           <AdminLayout
                user={auth.user}
-               header={<h2 className="font-semibold leading-tight text-md text-slate-700">Admin / <Link href={route('admin.user.index')} className="text-slate-700">Users</Link> / <span className="text-slate-500">Assign Roles</span></h2>}
+               header={<h2 className="font-semibold leading-tight text-md text-slate-700">Admin / <Link href={route('admin.user.index')} className="text-slate-700">Users</Link> / <span className="text-slate-500">Assign Permissions</span></h2>}
           >
                <Head title="Dashboard" />
 
@@ -45,21 +45,21 @@ export default function Role({ auth }) {
                          <div className="w-2/3 p-4 bg-white rounded-md">
                               <form onSubmit={submit} className="mt-6 space-y-6">
                                    <h2 className="text-lg font-medium text-gray-900">
-                                        Assign Roles to user <b>{user.related.person.fullname}</b>
+                                        Assign Perimissions to User <b>{user.related.person.fullname}</b>
                                    </h2>
-                                   {info.user_roles ? <p className="mt-1 text-sm text-gray-600"><b>Already have : </b>{info.user_roles}</p> : null}
+                                   {info.user_permissions ? <p className="mt-1 text-sm text-gray-600"><b>Already have : </b>{info.user_permissions}</p> : null}
                                    <FlashMessage />
                                    <div className="grid grid-cols-4 p-4 space-x-2 space-y-4 bg-slate-50">
-                                        {data.roles.map((role, i) => {
+                                        {data.permissions.map((permission, i) => {
                                              return <div key={`perms${i}`} className="block">
                                                   <label className="flex items-center">
                                                        <Checkbox
-                                                            id="roles[]"
-                                                            name="roles[]"
-                                                            checked={role.is_checked}
+                                                            id="permissions[]"
+                                                            name="permissions[]"
+                                                            checked={permission.is_checked}
                                                             onChange={(e) => handleChange(e, i)}
                                                        />
-                                                       <span className="ml-2 text-sm text-gray-600">{role.display_name}</span>
+                                                       <span className="ml-2 text-sm text-gray-600">{permission.display_name}</span>
                                                   </label>
                                              </div>
                                         })}

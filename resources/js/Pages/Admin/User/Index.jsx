@@ -68,6 +68,9 @@ export default function Index({ auth }) {
                                                             <Dropdown.Link href={route('admin.user.role.create', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'finger-print'} />Assign Roles
                                                             </Dropdown.Link>
+                                                            <Dropdown.Link href={route('admin.user.permission.create', username)}>
+                                                                 <Icon className={`mr-2 w-4 h-4`} name={'finger-print'} />Assign Permissions
+                                                            </Dropdown.Link>
                                                             <Dropdown.Link href={route('admin.user.password.edit', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'key'} />Change Password
                                                             </Dropdown.Link>

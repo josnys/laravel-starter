@@ -17,7 +17,7 @@ class AssignUserRoleController extends Controller
 {
     public function create(User $user) : Response
     {
-        return Inertia::render('Admin/User/Role', ['info' => (new UserService())->getUserRolleAssign($user->username)]);
+        return Inertia::render('Admin/User/Role', ['info' => (new UserService())->getUserRoleAssign($user->username)]);
     }
 
     public function store(AssignUserRoleRequest $request, User $user) : RedirectResponse
