@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domains\User\Models;
 
 use Database\Factories\PersonFactory;
+use Domains\Concerns\FindActive;
 use Domains\User\Models\Concerns\HasCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class Person extends Model
 {
     use HasCode;
+    use FindActive;
     use HasFactory;
 
     protected $fillable = [

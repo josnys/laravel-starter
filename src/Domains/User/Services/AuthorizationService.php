@@ -14,7 +14,11 @@ final class AuthorizationService
 {
      public function getAllPermissionPaginate(int $qty_per_page) : AnonymousResourceCollection
      {
-          return PermissionResource::collection(Permission::paginate($qty_per_page));
+          $permissions = Permission::query();
+          if(!request()->user()->can('create-permission')){
+               $permissions = $permissions->where('id', '!=', 2);
+          }
+          return PermissionResource::collection($permissions->paginate($qty_per_page));
      }
 
      public function getPermissionBySlug(string $slug) : PermissionResource

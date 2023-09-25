@@ -8,10 +8,12 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Domains\Concerns\FindActive;
 
 class Permission extends Model
 {
     use HasFactory;
+    use FindActive;
 
     protected $fillable = [
         'display_name',
@@ -32,11 +34,6 @@ class Permission extends Model
     public function users() : BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_permissions');
-    }
-
-    public function scopeActive($query) : Builder
-    {
-        return $query->where('is_active', true);
     }
 
     public static function userAccess(): array

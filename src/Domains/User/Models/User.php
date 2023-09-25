@@ -38,7 +38,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'dob' => 'datetime',
         'password' => 'hashed',
-        'is_active' => 'boolean',
+        'is_suspended' => 'boolean',
         'is_banned' => 'boolean'
     ];
 

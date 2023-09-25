@@ -16,7 +16,7 @@ class InitialSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            ['name' => 'Admin Access', 'status' => false],
+            ['name' => 'Admin Access', 'status' => true],
             ['name' => 'Create Permission', 'status' => false],
             ['name' => 'Read Permission', 'status' => true],
             ['name' => 'Update Permission', 'status' => true],
@@ -59,7 +59,7 @@ class InitialSeeder extends Seeder
             $perm->save();
 
             array_push($super_user_permissions, $perm->id);
-            if($key > 1){
+            if($key != 1){
                 array_push($admin_permissions, $perm->id);
             }
         }

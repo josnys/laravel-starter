@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domains\User\Models;
 
+use Domains\Concerns\FindActive;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Role extends Model
 {
     use HasFactory;
+    use FindActive;
 
     protected $fillable = [
         'display_name',
