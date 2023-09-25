@@ -36,7 +36,7 @@ export default ({user }) => {
                                                   type="button"
                                                   className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out bg-white border border-transparent rounded-md text-slate-500 hover:text-slate-700 focus:outline-none"
                                              >
-                                                  {user.name}
+                                                  {user.data.username}
                                                   <Icon name={'chevron-down'} className={'ml-2 -mr-0.5 h-4 w-4'} />
                                              </button>
                                         </span>

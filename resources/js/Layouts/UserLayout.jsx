@@ -38,7 +38,7 @@ export default function User({ user, header, children }) {
                                                             type="button"
                                                             className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                                        >
-                                                            {user.name}
+                                                            {user.data.username}
 
                                                             <svg
                                                                  className="ml-2 -mr-0.5 h-4 w-4"

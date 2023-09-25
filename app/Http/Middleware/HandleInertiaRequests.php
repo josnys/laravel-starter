@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\Domains\User\UserResource;
-use Domains\User\Models\User;
+use Domains\User\Services\UserService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -32,12 +31,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = auth()->check() ? User::with('person')->find(auth()->id()) : null;
+        $user = auth()->check() ? (new UserService())->getByUsername(auth()->user()->username) : null;
 
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $user ? UserResource::make($user) : null,
+                'user' => $user,
                 'can' => $user ? [
                     'admin_panel' => $user->can('admin-access'),
                 ] : null
