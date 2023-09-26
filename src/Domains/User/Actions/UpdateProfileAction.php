@@ -13,6 +13,8 @@ final class UpdateProfileAction
      {
           $person = Person::find($user->person_id);
 
+          $email_verified = ($user->email !== $data['email']);
+
           $person->firstname = $data['firstname'];
           $person->lastname = $data['lastname'];
           $person->dob = $data['dob'];
@@ -23,7 +25,7 @@ final class UpdateProfileAction
           $user->email = $data['email'];
           $user->update();
 
-          if($user->isDirty('email')){
+          if($email_verified){
                $user->email_verified_at = null;
                $user->update();
           }

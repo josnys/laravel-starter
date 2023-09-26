@@ -19,9 +19,10 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
+        $username = Str::slug(fake()->unique()->userName());
         return [
             'person_id' => Person::factory()->create(),
-            'username' => fake()->unique()->userName(),
+            'username' => $username,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
