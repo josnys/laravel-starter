@@ -9,7 +9,6 @@ use App\Http\Requests\Admin\User\AssignUserRoleRequest;
 use Domains\User\Models\User;
 use Domains\User\Services\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 

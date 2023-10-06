@@ -1,6 +1,7 @@
 <?php
 
 use Database\Seeders\DatabaseSeeder;
+use Domains\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +17,9 @@ use Tests\TestCase;
 */
 
 uses(TestCase::class, RefreshDatabase::class)->beforeEach(function() {
-    $this->seed(DatabaseSeeder::class);
+    $this->artisan('optimize:clear');
+    $this->artisan('migrate:fresh --seed');
+    // $this->seed(DatabaseSeeder::class);
 })->in('Feature');
 
 /*
@@ -45,7 +48,15 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function createUser()
 {
-    // ..
+    return User::factory()->createOne();
+}
+
+function createUserAdmin()
+{
+    $user = User::factory()->createOne();
+    $user->roles()->sync([1]);
+    $user->refresh();
+    return $user;
 }

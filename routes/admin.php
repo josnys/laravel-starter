@@ -11,12 +11,12 @@ use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'can:admin-access']], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'permission:admin-access']], function(){
      Route::get('/dashboard', DashboardController::class)->name('dashboard');
      Route::get('/to-user', AdminToUserController::class)->name('to.user');
 
      Route::group(['prefix' => 'permission', 'as' => 'permission.'], function(){
-          Route::get('/', [PermissionController::class, 'index'])->name('index');
+          Route::get('/', [PermissionController::class, 'index'])->middleware('permission:read-permission')->name('index');
           Route::post('/create', [PermissionController::class, 'store'])->name('store');
           Route::patch('/{permission:slug}/edit', [PermissionController::class, 'update'])->name('update');
      });
@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
           Route::post('/{role:slug}/permission', [AssignRolePermissionController::class, 'store'])->name('permission.store');
      });
 
-     Route::group(['prefix' => 'users', 'as' => 'user.'], function(){
+     Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
           Route::get('/', [UserController::class, 'index'])->name('index');
           Route::get('/{user:username}/edit', [UserController::class, 'edit'])->name('edit');
           Route::patch('/{user:username}/edit', [UserController::class, 'update'])->name('update');
