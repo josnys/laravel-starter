@@ -10,7 +10,7 @@ class AssignUserRoleRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->allowedTo('assign-role-to-user');
     }
 
     public function rules(): array

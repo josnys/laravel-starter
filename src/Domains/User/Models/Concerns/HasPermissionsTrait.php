@@ -54,6 +54,12 @@ trait HasPermissionsTrait
           return false;
      }
 
+     public function allowedTo(string $permission) : bool
+     {
+          $perms = Permission::where('slug', $permission)->first();
+          return $this->hasPermissionTo($perms);
+     }
+
      public function hasRole(array ...$roles) : bool
      {
           foreach($roles as $role)

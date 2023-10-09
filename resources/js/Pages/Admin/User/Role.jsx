@@ -8,7 +8,6 @@ import CancelButton from '@/Components/CancelButton';
 export default function Role({ auth }) {
      const { info } = usePage().props;
      const user = info.user.data;
-     console.log(user);
      const { data, setData, post, errors, processing } = useForm({
           roles: info.roles || []
      });

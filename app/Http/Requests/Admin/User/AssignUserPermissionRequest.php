@@ -10,7 +10,7 @@ class AssignUserPermissionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->allowedTo('assign-permission-to-user');
     }
 
     public function rules(): array

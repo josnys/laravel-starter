@@ -47,9 +47,9 @@ export default function Permission({ auth }) {
                                    <h2 className="text-lg font-medium text-gray-900">
                                         Assign Perimissions to User <b>{user.related.person.fullname}</b>
                                    </h2>
-                                   {info.user_permissions ? <p className="mt-1 text-sm text-gray-600"><b>Already have : </b>{info.user_permissions}</p> : null}
+                                   {info.display_permission ? <p className="mt-1 text-sm text-gray-600"><b>Already have : </b>{info.display_permission}</p> : null}
                                    <FlashMessage />
-                                   <div className="grid grid-cols-4 p-4 space-x-2 space-y-4 bg-slate-50">
+                                   {data.permissions.length ? <div className="grid grid-cols-4 p-4 space-x-2 space-y-4 bg-slate-50">
                                         {data.permissions.map((permission, i) => {
                                              return <div key={`perms${i}`} className="block">
                                                   <label className="flex items-center">
@@ -63,7 +63,7 @@ export default function Permission({ auth }) {
                                                   </label>
                                              </div>
                                         })}
-                                   </div>
+                                   </div>: <div className="p-2 text-xs text-center text-yellow-700 bg-yellow-200 border-yellow-400 rounded">This user already have all permissions through role(s).</div>}
                                    <div className="flex justify-between">
                                         <CancelButton link={route('admin.user.index')}>Cancel</CancelButton>
                                         <PrimaryButton disabled={processing}>Save</PrimaryButton>

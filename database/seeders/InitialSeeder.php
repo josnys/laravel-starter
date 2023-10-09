@@ -25,6 +25,11 @@ class InitialSeeder extends Seeder
             ['name' => 'Read Role', 'status' => true],
             ['name' => 'Update Role', 'status' => true],
             ['name' => 'Delete Role', 'status' => true],
+            ['name' => 'Update User', 'status' => true],
+            ['name' => 'Change User Password', 'status' => true],
+            ['name' => 'Assign Permission to Role', 'status' => true],
+            ['name' => 'Assign Permission to User', 'status' => true],
+            ['name' => 'Assign Role to User', 'status' => true],
         ];
 
         $roles = [

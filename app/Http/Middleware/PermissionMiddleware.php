@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PermissionMiddleware
 {
-    public function handle(Request $request, Closure $next, $permission): Response
+    public function handle(Request $request, Closure $next, string $permission): Response
     {
         if($permission !== null)
         {

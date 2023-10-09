@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domains\User\Models;
 
+use Database\Factories\RoleFactory;
 use Domains\Concerns\FindActive;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,7 +47,12 @@ class Role extends Model
         return [
             'add_new' => request()->user()->can('create-role'),
             'edit' => request()->user()->can('update-role'),
-            // 'add_permissions' => request()->user()->can(''),
+            'assign_permission' => request()->user()->can('assign-permission-to-role'),
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return new RoleFactory();
     }
 }

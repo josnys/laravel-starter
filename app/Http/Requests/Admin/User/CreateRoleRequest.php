@@ -10,7 +10,7 @@ class CreateRoleRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('create-role');
+        return $this->user()->allowedTo('create-role');
     }
 
     public function rules(): array

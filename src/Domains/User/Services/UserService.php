@@ -47,12 +47,16 @@ final class UserService
      {
           $user = User::with('person')->with(['roles' => fn($roles) => $roles->with('permissions')])->with('permissions')->where('username', $username)->first();
           $user_permissions = $user->permissions->pluck('id')->toArray();
-
+          
+          $all_permissions = array();
           $permission_through_role = array();
           foreach($user->roles as $role){
                array_push($permission_through_role, $role->permissions->pluck('id')->toArray());
+               array_push($all_permissions, $role->permissions->pluck('display_name')->toArray());
           }
           $permission_through_role = Arr::collapse($permission_through_role);
+          array_push($all_permissions, $user->permissions->pluck('display_name')->toArray());
+          $all_permissions = Arr::collapse($all_permissions);
 
           return [
                'permissions' => Permission::active()->whereNotIn('id', $permission_through_role)->get()->map(function($permission) use ($user_permissions){
@@ -65,6 +69,7 @@ final class UserService
                     ];
                }),
                'user_permissions' => $user->permissions->pluck('display_name')->join(', '),
+               'display_permission' => collect($all_permissions)->join(', '),
                'user' => UserResource::make($user)
           ];
      }

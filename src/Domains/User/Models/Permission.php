@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domains\User\Models;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Database\Factories\PermissionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -42,5 +42,10 @@ class Permission extends Model
             'add_new' => request()->user()->can('create-permission'),
             'edit' => request()->user()->can('update-permission'),
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return new PermissionFactory();
     }
 }

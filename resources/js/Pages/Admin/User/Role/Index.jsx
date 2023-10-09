@@ -47,7 +47,7 @@ export default function Index({ auth }) {
                          <div className="w-full col-span-12">
                               <div className="p-2 mb-2 rounded bg-slate-50">
                                    <div className="flex justify-end">
-                                        {info.can.add_new ? <AddButton link="#" onClick={handleModal}>Add New</AddButton> : null}
+                                        {info.authorize_to.add_new ? <AddButton link="#" onClick={handleModal}>Add New</AddButton> : null}
                                    </div>
                               </div>
                               <DataTable header={info.header} showNoData={roles.length}>
@@ -70,12 +70,12 @@ export default function Index({ auth }) {
                                                        </Dropdown.Trigger>
 
                                                        <Dropdown.Content>
-                                                            {info.can.edit ? <Dropdown.Link href="#" onClick={(e) => handleEditModal(e, role)}>
+                                                            {info.authorize_to.edit ? <Dropdown.Link href="#" onClick={(e) => handleEditModal(e, role)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'edit'} />Edit
                                                             </Dropdown.Link> : null}
-                                                            <Dropdown.Link href={route('admin.role.permission.create', role.slug)}>
+                                                            {info.authorize_to.assign_permission ? <Dropdown.Link href={route('admin.role.permission.create', role.slug)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'key'} />Assign Permissions
-                                                            </Dropdown.Link>
+                                                            </Dropdown.Link>: null}
                                                        </Dropdown.Content>
                                                   </Dropdown>
                                              </DataTableItem>

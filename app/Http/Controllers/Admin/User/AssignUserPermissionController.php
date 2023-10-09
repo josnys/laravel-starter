@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\AssignUserPermissionRequest;
+use Domains\User\Models\Permission;
 use Domains\User\Models\User;
 use Domains\User\Services\UserService;
 use Illuminate\Http\RedirectResponse;

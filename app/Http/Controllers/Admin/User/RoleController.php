@@ -28,7 +28,7 @@ class RoleController extends Controller
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Name', 'Slug', 'Status', ''],
             'roles' => (new AuthorizationService())->getAllRolePaginate(50),
-            'can' => Role::userAccess()
+            'authorize_to' => Role::userAccess()
         ]]);
     }
 

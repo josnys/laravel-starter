@@ -51,6 +51,15 @@ services:
       - mysql_database
       - redis
 
+  # Mail service
+  mailpit:
+    image: axllent/mailpit
+    container_name: MailPit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - lara-starter
 
 volumes:
   mysql_data: ~

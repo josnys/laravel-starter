@@ -11,7 +11,7 @@ class ChangeUserPasswordRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->allowedTo('change-user-password');
     }
 
     public function rules(): array

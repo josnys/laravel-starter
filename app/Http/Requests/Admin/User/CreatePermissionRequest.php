@@ -10,7 +10,7 @@ class CreatePermissionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('create-permission');
+        return $this->user()->allowedTo('create-permission');
     }
 
     public function rules(): array

@@ -65,18 +65,18 @@ export default function Index({ auth }) {
                                                        </Dropdown.Trigger>
 
                                                        <Dropdown.Content>
-                                                            <Dropdown.Link href={route('admin.user.edit', username)}>
+                                                            {info.authorize_to.edit?<Dropdown.Link href={route('admin.user.edit', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'edit'} />Edit
-                                                            </Dropdown.Link>
-                                                            <Dropdown.Link href={route('admin.user.role.create', username)}>
+                                                            </Dropdown.Link>:null}
+                                                            {info.authorize_to.assign_role?<Dropdown.Link href={route('admin.user.role.create', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'finger-print'} />Assign Roles
-                                                            </Dropdown.Link>
-                                                            <Dropdown.Link href={route('admin.user.permission.create', username)}>
+                                                            </Dropdown.Link>:null}
+                                                            {info.authorize_to.assign_permission?<Dropdown.Link href={route('admin.user.permission.create', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'finger-print'} />Assign Permissions
-                                                            </Dropdown.Link>
-                                                            <Dropdown.Link href={route('admin.user.password.edit', username)}>
+                                                            </Dropdown.Link>:null}
+                                                            {info.authorize_to.change_password?<Dropdown.Link href={route('admin.user.password.edit', username)}>
                                                                  <Icon className={`mr-2 w-4 h-4`} name={'key'} />Change Password
-                                                            </Dropdown.Link>
+                                                            </Dropdown.Link>:null}
                                                        </Dropdown.Content>
                                                   </Dropdown>
                                              </DataTableItem>

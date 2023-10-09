@@ -25,6 +25,12 @@ class UserController extends Controller
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Code', 'Name', 'Username', 'E-mail', 'Roles', 'Status', ''],
             'users' => (new UserService())->getAllPaginate(50),
+            'authorize_to' => [
+                'edit' => $request->user()->allowedTo('update-user'),
+                'assign_role' => $request->user()->allowedTo('assign-role-to-user'),
+                'assign_permission' => $request->user()->allowedTo('assign-permission-to-user'),
+                'change_password' => $request->user()->allowedTo('change-user-password')
+            ]
         ]]);
     }
 
