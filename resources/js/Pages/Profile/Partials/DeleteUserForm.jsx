@@ -7,7 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 
-export default function DeleteUserForm({ className = '' }) {
+export default function DeleteUserForm({ className = '', formSuccess }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -31,7 +31,7 @@ export default function DeleteUserForm({ className = '' }) {
 
         destroy(route('user.profile.destroy'), {
             preserveScroll: true,
-            onSuccess: () => closeModal(),
+            onSuccess: () => { closeModal(), formSuccess() },
             onError: () => passwordInput.current.focus(),
             onFinish: () => reset(),
         });

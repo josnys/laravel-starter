@@ -7,7 +7,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import FlashMessage from '@/Components/FlashMessage';
 
-export default function UpdateProfileInformation({ mustVerifyEmail, profile, status, className = '' }) {
+export default function UpdateProfileInformation({ mustVerifyEmail, formSuccess, profile, status, className = '' }) {
     const user = usePage().props.auth.user;
     const _profile = profile.data;
 
@@ -23,7 +23,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, profile, sta
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('user.profile.update'));
+        patch(route('user.profile.update'), {
+            onSuccess: () => {
+                formSuccess();
+            }
+        });
     };
 
     return (
@@ -148,7 +152,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, profile, sta
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center float-right gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
                     <Transition

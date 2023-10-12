@@ -20,7 +20,7 @@ class ProfileController extends Controller
 {
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
+        return Inertia::render('Profile/Show', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'profile' => (new ProfileService($request->user()))->getUser(),
             'status' => session('status'),
@@ -33,6 +33,10 @@ class ProfileController extends Controller
 
         $data = (new UpdateProfileAction())->handle($input->toArray(), $request->user());
 
+        if($data->email_verified_at) {
+            $data->sendEmailVerificationNotification();
+        }
+
         return redirect()->route('user.profile.edit')->with('success', 'Profile modified successfully.');
     }
 
@@ -43,6 +47,10 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        if($user->id === 1){
+            return redirect()->route('user.profile.edit')->with('warning', 'This user can not be deleted.');
+        }
 
         Auth::logout();
 

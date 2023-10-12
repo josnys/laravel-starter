@@ -7,7 +7,7 @@ import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import FlashMessage from '@/Components/FlashMessage';
 
-export default function UpdatePasswordForm({ className = '' }) {
+export default function UpdatePasswordForm({ className = '', formSuccess }) {
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -22,7 +22,7 @@ export default function UpdatePasswordForm({ className = '' }) {
 
         put(route('password.update'), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => { reset(); formSuccess(); },
             onError: (errors) => {
                 if (errors.password) {
                     reset('password', 'password_confirmation');
@@ -96,7 +96,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center float-right gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
                     <Transition

@@ -1,10 +1,8 @@
 import UserLayout from '@/Layouts/UserLayout';
-import DeleteUserForm from './Partials/DeleteUserForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import { Head } from '@inertiajs/react';
+import Profile from '@/Pages/Profile/Partials/Profile';
 
-export default function Edit({ auth, mustVerifyEmail, status, profile }) {
+export default function Show({ auth, mustVerifyEmail, status, profile }) {
     return (
         <UserLayout
             user={auth.user}
@@ -15,20 +13,12 @@ export default function Edit({ auth, mustVerifyEmail, status, profile }) {
             <div className="py-12">
                 <div className="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
                     <div className="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
-                        <UpdateProfileInformationForm
+                        <Profile 
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
                             className="max-w-xl"
-                            profile={profile}
+                            profile={profile} 
                         />
-                    </div>
-
-                    <div className="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
-
-                    <div className="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
-                        <DeleteUserForm className="max-w-xl" />
                     </div>
                 </div>
             </div>
