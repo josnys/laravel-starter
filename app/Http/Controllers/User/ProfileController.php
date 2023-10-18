@@ -7,6 +7,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use Domains\User\Actions\UpdateProfileAction;
+use Domains\User\Models\User;
 use Domains\User\Services\ProfileService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -20,9 +21,11 @@ class ProfileController extends Controller
 {
     public function edit(Request $request): Response
     {
+        $user = User::find($request->user()->id);
+
         return Inertia::render('Profile/Show', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'profile' => (new ProfileService($request->user()))->getUser(),
+            'profile' => (new ProfileService($user))->getUser(),
             'status' => session('status'),
         ]);
     }

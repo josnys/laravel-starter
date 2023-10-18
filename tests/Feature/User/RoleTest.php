@@ -3,11 +3,12 @@
 use Domains\User\Models\Permission;
 use Domains\User\Models\Role;
 use Illuminate\Support\Str;
+use function Pest\Laravel\{actingAs};
 
 test('user can access role page', function () {
     $user = createUserAdmin();
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->get(route('admin.role.index'));
 
     $response->assertOk();
@@ -16,7 +17,7 @@ test('user can access role page', function () {
 test('user can not access role page', function () {
     $user = createUser();
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->get(route('admin.role.index'));
 
     $response->assertForbidden();
@@ -27,7 +28,7 @@ test('user can create a new role', function(){
     $name = implode(' ', fake()->words(2));
     $data = ['display_name' => $name, 'slug' => Str::slug($name), 'is_active' => fake()->boolean()];
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->post(route('admin.role.store'), $data);
 
     $response->assertSessionHasNoErrors()
@@ -39,7 +40,7 @@ test('user is not authorized to create a new role', function () {
     $name = implode(' ', fake()->words(2));
     $data = ['display_name' => $name, 'slug' => Str::slug($name), 'is_active' => fake()->boolean()];
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->post(route('admin.role.store'), $data);
 
     $response->assertSessionHasNoErrors()
@@ -50,7 +51,7 @@ test('user can update a new role', function () {
     $user = createUserAdmin();
     $role = Role::factory()->createOne();
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->patch(route('admin.role.update', $role->slug), [
             'display_name' => 'Updated Role',
             'is_active' => fake()->boolean()
@@ -60,7 +61,7 @@ test('user can update a new role', function () {
 
     $response->assertSessionHasNoErrors()
         ->assertRedirect('/admin/role');
-    $this->assertSame('Updated Role', $role->display_name);
+    expect($role->display_name)->toEqual('Updated Role');
 });
 
 test('user can assign permissions to role', function(){
@@ -71,14 +72,14 @@ test('user can assign permissions to role', function(){
 
     $role = Role::factory()->createOne();
 
-    $response = $this->actingAs($user)
+    $response = actingAs($user)
         ->post(route('admin.role.permission.store', $role->slug), [
             'permissions' => $permissions
         ]);
     
     $response->assertSessionHasNoErrors()
         ->assertRedirect('admin/role');
-    
-    $this->assertSame($role->permissions()->pluck('id')->toArray(), collect($permissions)->where('is_checked', true)->pluck('id')->toArray());
+
+    expect($role->permissions()->pluck('id')->toArray())->toEqualCanonicalizing(collect($permissions)->where('is_checked', true)->pluck('id')->toArray());
     expect($role->permissions()->pluck('id')->toArray())->toEqual(collect($permissions)->where('is_checked', true)->pluck('id')->toArray());
 });

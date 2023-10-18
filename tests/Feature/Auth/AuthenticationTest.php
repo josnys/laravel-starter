@@ -1,48 +1,48 @@
 <?php
 
-use Domains\User\Models\User;
 use App\Providers\RouteServiceProvider;
+use function Pest\Laravel\{get, post, assertAuthenticated, assertGuest};
 
-test('login screen can be rendered', function () {    
-    $response = $this->get('/login');
+test('login screen can be rendered', function () {  
+    $response = get('/login');
 
     $response->assertStatus(200);
 });
 
 test('users can authenticate using the login screen with username', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
-    $response = $this->post('/login', [
+    $response = post('/login', [
         'email' => $user->username,
         'password' => 'password',
         'remember' => fake()->boolean()
     ]);
     
-    $this->assertAuthenticated();
+    assertAuthenticated();
     $response->assertRedirect(RouteServiceProvider::HOME);
 });
 
 test('users can authenticate using the login screen with email', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
-    $response = $this->post('/login', [
+    $response = post('/login', [
         'email' => $user->email,
         'password' => 'password',
         'remember' => fake()->boolean()
     ]);
 
-    $this->assertAuthenticated();
+    assertAuthenticated();
     $response->assertRedirect(RouteServiceProvider::HOME);
 });
 
 test('users can not authenticate with invalid password', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
-    $this->post('/login', [
+    post('/login', [
         'email' => $user->email,
         'password' => 'wrong-password',
         'remember' => fake()->boolean()
     ]);
 
-    $this->assertGuest();
+    assertGuest();
 });

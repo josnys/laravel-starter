@@ -1,8 +1,8 @@
 <?php
 
-use Database\Seeders\DatabaseSeeder;
 use Domains\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 /*
@@ -17,9 +17,8 @@ use Tests\TestCase;
 */
 
 uses(TestCase::class, RefreshDatabase::class)->beforeEach(function() {
-    $this->artisan('optimize:clear');
-    $this->artisan('migrate:fresh --seed');
-    // $this->seed(DatabaseSeeder::class);
+    Artisan::call('optimize:clear');
+    Artisan::call('migrate:fresh --seed');
 })->in('Feature');
 
 /*
@@ -34,7 +33,7 @@ uses(TestCase::class, RefreshDatabase::class)->beforeEach(function() {
 */
 
 expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+    return expect(1)->toBe(1);
 });
 
 /*

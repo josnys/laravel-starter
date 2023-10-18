@@ -2,12 +2,12 @@
 
 use Domains\User\Models\User;
 use Illuminate\Support\Facades\Hash;
+use function Pest\Laravel\{actingAs};
 
 test('password can be updated', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
-    $response = $this
-        ->actingAs($user)
+    $response = actingAs($user)
         ->from('/user/profile')
         ->put('/password', [
             'current_password' => 'password',
@@ -16,7 +16,7 @@ test('password can be updated', function () {
         ]);
     $user = User::find($user->id);
 
-    $this->assertTrue(Hash::check('new-password', $user->password));
+    expect(Hash::check('new-password', $user->password))->toBeTrue();
 
     $response
         ->assertSessionHasNoErrors()
@@ -24,10 +24,9 @@ test('password can be updated', function () {
 });
 
 test('correct password must be provided to update password', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
-    $response = $this
-        ->actingAs($user)
+    $response = actingAs($user)
         ->from('/user/profile')
         ->put('/password', [
             'current_password' => 'wrong-password',
