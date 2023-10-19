@@ -19,10 +19,10 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
-    {
-        return parent::version($request);
-    }
+    // public function version(Request $request): string|null
+    // {
+    //     return parent::version($request);
+    // }
 
     /**
      * Define the props that are shared by default.
@@ -39,10 +39,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
                 'can' => $user ? [
                     'admin_panel' => $user->can('admin-access'),
-                ] : null
+                ] : null,
             ],
             'ziggy' => fn () => [
-                ...(new Ziggy)->toArray(),
+                ...(new Ziggy())->toArray(),
                 'location' => $request->url(),
             ],
             'flash' => [

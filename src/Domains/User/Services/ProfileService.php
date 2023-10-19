@@ -5,27 +5,18 @@ declare(strict_types=1);
 namespace Domains\User\Services;
 
 use App\Http\Resources\Domains\User\UserResource;
+use Domains\User\Contracts\ProfileServiceInterface;
 use Domains\User\Models\User;
 
-final class ProfileService {
-     /**
-      * @param User $user
-      */
-     public function __construct(
-          protected readonly User $user
-     ){}
+class ProfileService implements ProfileServiceInterface
+{
+    public function getUserByUsername(string $username): UserResource | null
+    {
+        $profile = User::query()->with('person')->where('username', $username)->first();
+        if (! $profile) {
+            return null;
+        }
 
-     /**
-      * @return JsonResource<UserResource>
-      */
-     public function getUser() : UserResource
-     {
-          try {
-               $profile = User::query()->with('person')->find($this->user->id);
-               
-               return new UserResource($profile);
-          } catch (\Exception $e) {
-               info($e);
-          }
-     }
+        return new UserResource($profile);
+    }
 }

@@ -19,25 +19,26 @@ class PermissionController extends Controller
 {
     public function __construct(
         protected readonly string $base_path = 'Admin/User/Permission'
-    ){}
+    ) {
+    }
 
-
-    public function index(Request $request) : Response
+    public function index(Request $request): Response
     {
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Name', 'Slug', 'Status', ''],
             'permissions' => (new AuthorizationService())->getAllPermissionPaginate(50),
-            'can' => Permission::userAccess()
-        ]]);
+            'can' => Permission::userAccess(),
+        ],
+        ]);
     }
 
-    public function store(CreatePermissionRequest $request) : RedirectResponse
+    public function store(CreatePermissionRequest $request): RedirectResponse
     {
         $input = $request->validated();
-        
+
         $result = (new CreatePermissionAction())->handle($input['permissions']);
 
-        return redirect()->route('admin.permission.index')->with('success', "$result permission(s) authorization created.");
+        return redirect()->route('admin.permission.index')->with('success', "{$result} permission(s) authorization created.");
     }
 
     public function update(UpdatePermissionRequest $request, Permission $permission): RedirectResponse
@@ -48,6 +49,6 @@ class PermissionController extends Controller
         $permission->is_active = $input['is_active'];
         $permission->update();
 
-        return redirect()->route('admin.permission.index')->with('success', "Permission authorization updated.");
+        return redirect()->route('admin.permission.index')->with('success', 'Permission authorization updated.');
     }
 }

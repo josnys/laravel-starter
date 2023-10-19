@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Admin\User;
 
 use Domains\User\DTO\UserData;
-use Domains\User\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -18,10 +16,8 @@ class UpdateUserRequest extends FormRequest
 
     public function rules(): array
     {
-        $user = User::where('username', $this->current_username)->first();
-
         return [
-            'firstname' =>  'required|string|max:255',
+            'firstname' => 'required|string|max:255',
             'lastname' => 'sometimes|nullable|string|max:255',
             'dob' => 'sometimes|nullable|date',
             'bio' => 'sometimes|nullable|string',
@@ -30,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    public function payload() : UserData
+    public function payload(): UserData
     {
         return UserData::fromRequest(
             data: [
@@ -39,7 +35,7 @@ class UpdateUserRequest extends FormRequest
                 'dob' => $this->string('dob')->toDate(),
                 'bio' => $this->string('bio')->toString(),
                 'suspended' => $this->string('suspended')->toBoolean(),
-                'banned' => $this->string('banned')->toBoolean()
+                'banned' => $this->string('banned')->toBoolean(),
             ]
         );
     }

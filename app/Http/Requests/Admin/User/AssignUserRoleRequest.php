@@ -19,7 +19,7 @@ class AssignUserRoleRequest extends FormRequest
             'roles' => ['required', 'array'],
             'roles.*.id' => ['required', 'integer'],
             'roles.*.slug' => ['required', 'alpha_dash'],
-            'roles.*.is_checked' => ['required', 'boolean']
+            'roles.*.is_checked' => ['required', 'boolean'],
         ];
     }
 }

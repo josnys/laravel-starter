@@ -17,7 +17,7 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             'display_name' => ['required', 'string', 'max:255'],
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
         ];
     }
 }

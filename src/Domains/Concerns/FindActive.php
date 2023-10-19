@@ -6,12 +6,11 @@ namespace Domains\Concerns;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as ModelBuilder;
-use Illuminate\Database\Eloquent\Model;
 
 trait FindActive
 {
-     public function scopeActive(ModelBuilder $model) : Builder
-     {
-          return $model->where('is_active', true);
-     }
+    public function scopeActive(ModelBuilder $model): Builder
+    {
+        return $model->where('is_active', true);
+    }
 }

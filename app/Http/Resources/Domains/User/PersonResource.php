@@ -23,8 +23,8 @@ class PersonResource extends JsonResource
             'phone' => $this->phone,
             'avatar' => [
                 'small' => $this->small_avatar,
-                'large' => $this->large_avatar
-            ]
+                'large' => $this->large_avatar,
+            ],
         ];
     }
 }

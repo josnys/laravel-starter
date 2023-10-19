@@ -17,8 +17,8 @@ class PermissionResource extends JsonResource
             'slug' => $this->slug,
             'status' => [
                 'value' => $this->is_active,
-                'text' => $this->is_active ? 'Active' : 'Inactive'
-            ]
+                'text' => $this->is_active ? 'Active' : 'Inactive',
+            ],
         ];
     }
 }

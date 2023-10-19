@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
     {
         try {
             $input = $request->payload();
-            
+
             $user = (new CreateUserAction())->handle($input->toArray());
 
             $message = "Welcome to your dashboard {$user->username}";

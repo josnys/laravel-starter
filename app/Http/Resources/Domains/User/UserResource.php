@@ -17,12 +17,12 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'related' => [
                 'person' => PersonResource::make($this->whenLoaded('person')),
-                'roles' => $this->whenLoaded('roles') ? $this->roles->pluck('display_name')->join(', ') : null
+                'roles' => $this->whenLoaded('roles') ? $this->roles->pluck('display_name')->join(', ') : null,
             ],
             'status' => [
                 'suspended' => ['value' => $this->is_suspended, 'text' => $this->is_suspended ? 'Suspended' : 'Not Suspended'],
                 'banned' => ['value' => $this->is_banned, 'text' => $this->is_banned ? 'Banned' : 'Not Ban'],
-            ]
+            ],
         ];
     }
 }

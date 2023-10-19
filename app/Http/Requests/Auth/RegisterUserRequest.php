@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Requests\Auth;
 
 use Domains\User\DTO\RegisterUserData;
+use Domains\User\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
-use Domains\User\Models\User;
 
 class RegisterUserRequest extends FormRequest
 {
@@ -19,7 +19,7 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' =>  'required|string|max:255',
+            'firstname' => 'required|string|max:255',
             'lastname' => 'sometimes|nullable|string|max:255',
             'username' => 'required|string|max:50|alpha_dash|unique:users',
             'email' => 'required|string|email|max:255|unique:' . User::class,
@@ -27,7 +27,7 @@ class RegisterUserRequest extends FormRequest
         ];
     }
 
-    public function payload() : RegisterUserData
+    public function payload(): RegisterUserData
     {
         return RegisterUserData::fromRequest(
             data: [

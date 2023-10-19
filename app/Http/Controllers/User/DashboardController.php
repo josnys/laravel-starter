@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-   public function __invoke(Request $request)
+    public function __invoke(Request $request)
     {
         Inertia::setRootView('user');
         return Inertia::render('User/Dashboard');

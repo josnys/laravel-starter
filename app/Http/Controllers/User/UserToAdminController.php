@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class UserToAdminController extends Controller
 {
-   public function __invoke(Request $request)
+    public function __invoke(Request $request)
     {
         return redirect()->to('admin/dashboard');
     }

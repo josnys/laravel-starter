@@ -22,14 +22,14 @@ class RoleController extends Controller
     ) {
     }
 
-
     public function index(Request $request): Response
     {
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Name', 'Slug', 'Status', ''],
             'roles' => (new AuthorizationService())->getAllRolePaginate(50),
-            'authorize_to' => Role::userAccess()
-        ]]);
+            'authorize_to' => Role::userAccess(),
+        ],
+        ]);
     }
 
     public function store(CreateRoleRequest $request): RedirectResponse
@@ -38,7 +38,9 @@ class RoleController extends Controller
 
         $result = (new CreateRoleAction())->handle($input);
 
-        return redirect()->route('admin.role.index')->with('success', "Role created successfully.");
+        $message = $result->wasRecentlyCreated ? 'Role created successfully.' : 'No Action taken';
+
+        return redirect()->route('admin.role.index')->with('success', $message);
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
@@ -49,6 +51,6 @@ class RoleController extends Controller
         $role->is_active = $input['is_active'];
         $role->update();
 
-        return redirect()->route('admin.role.index')->with('success', "Role access updated.");
+        return redirect()->route('admin.role.index')->with('success', 'Role access updated.');
     }
 }

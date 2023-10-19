@@ -18,9 +18,10 @@ class UserController extends Controller
 {
     public function __construct(
         protected readonly string $base_path = 'Admin/User'
-    ){}
-    
-    public function index(Request $request) : Response
+    ) {
+    }
+
+    public function index(Request $request): Response
     {
         return Inertia::render("{$this->base_path}/Index", ['info' => [
             'header' => ['Code', 'Name', 'Username', 'E-mail', 'Roles', 'Status', ''],
@@ -29,22 +30,21 @@ class UserController extends Controller
                 'edit' => $request->user()->allowedTo('update-user'),
                 'assign_role' => $request->user()->allowedTo('assign-role-to-user'),
                 'assign_permission' => $request->user()->allowedTo('assign-permission-to-user'),
-                'change_password' => $request->user()->allowedTo('change-user-password')
-            ]
-        ]]);
+                'change_password' => $request->user()->allowedTo('change-user-password'),
+            ],
+        ],
+        ]);
     }
 
     public function create()
     {
-        //
     }
 
     public function store(Request $request)
     {
-        //
     }
 
-    public function show(User $username) : Response
+    public function show(User $username): Response
     {
         return Inertia::render("{$this->base_path}/Form", ['info' => ['user' => (new UserService())->getByUsername($username->username)]]);
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
         return Inertia::render("{$this->base_path}/Form", ['info' => ['user' => (new UserService())->getByUsername($user->username)]]);
     }
 
-    public function update(UpdateUserRequest $request, User $user) : RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $input = $request->payload();
 
@@ -63,7 +63,7 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'User modified successfully.');
     }
 
-    public function destroy(User $user) : RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
         return redirect()->route('admin.user.index')->with('success', 'User deleted successfully.');
     }

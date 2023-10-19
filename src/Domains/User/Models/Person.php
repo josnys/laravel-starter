@@ -31,25 +31,25 @@ class Person extends Model
         'is_banned',
     ];
 
-    protected $cast =[
+    protected $cast = [
         'dob' => 'datetime',
         'is_active' => 'boolean',
-        'is_banned' => 'boolean'
+        'is_banned' => 'boolean',
     ];
 
-    public function user() : HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(User::class, 'person_id');
     }
 
     public function getSmallAvatarAttribute(): string | null
     {
-        return ($this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url)) ? route('show.image', 'users/thumbnails/' . $this->profile_url) : null;
+        return $this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url) ? route('show.image', 'users/thumbnails/' . $this->profile_url) : null;
     }
 
     public function getLargeAvatarAttribute(): string | null
     {
-        return ($this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url)) ? route('show.image', 'users/' . $this->profile_url) : null;
+        return $this->profile_url && Storage::disk('local')->exists('users/' . $this->profile_url) ? route('show.image', 'users/' . $this->profile_url) : null;
     }
 
     protected static function newFactory()

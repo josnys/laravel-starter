@@ -23,7 +23,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string'],
             'password' => ['required', 'string'],
-            'remember' => ['required', 'boolean']
+            'remember' => ['required', 'boolean'],
         ];
     }
 
@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
 
         $user = User::where($field, $this->email)->first();
 
-        if(! $user || !Hash::check($this->password, $user->password)) {
+        if (! $user || ! Hash::check($this->password, $user->password)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

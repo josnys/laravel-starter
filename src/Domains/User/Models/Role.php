@@ -20,24 +20,24 @@ class Role extends Model
         'display_name',
         'slug',
         'description',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
-    public function permissions() : BelongsToMany
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class, 'roles_permissions');
     }
 
-    public function users() : BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_roles');
     }
 
-    public function scopeActive($query) : Builder
+    public function scopeActive($query): Builder
     {
         return $query->where('is_active', true);
     }

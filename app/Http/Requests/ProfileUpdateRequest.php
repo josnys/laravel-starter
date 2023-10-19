@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' =>  'required|string|max:255',
+            'firstname' => 'required|string|max:255',
             'lastname' => 'sometimes|nullable|string|max:255',
             'username' => ['required','string','max:50','alpha_dash',Rule::unique(User::class)->ignore($this->user()->id)],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
@@ -26,7 +26,7 @@ class ProfileUpdateRequest extends FormRequest
         ];
     }
 
-    public function payload() : UserProfileData
+    public function payload(): UserProfileData
     {
         return UserProfileData::fromRequest(
             data: [

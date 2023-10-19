@@ -19,7 +19,7 @@ class AssignUserPermissionRequest extends FormRequest
             'permissions' => ['required', 'array'],
             'permissions.*.id' => ['required', 'integer'],
             'permissions.*.slug' => ['required', 'alpha_dash'],
-            'permissions.*.is_checked' => ['required', 'boolean']
+            'permissions.*.is_checked' => ['required', 'boolean'],
         ];
     }
 }

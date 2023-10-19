@@ -18,7 +18,7 @@ class CreateRoleRequest extends FormRequest
         return [
             'display_name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'alpha_dash', 'unique:roles,slug'],
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
         ];
     }
 }

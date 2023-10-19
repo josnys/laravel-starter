@@ -13,11 +13,10 @@ class PermissionMiddleware
 {
     public function handle(Request $request, Closure $next, string $permission): Response
     {
-        if($permission !== null)
-        {
+        if ($permission !== null) {
             $perms = Permission::where('slug', $permission)->first();
 
-            if(!$perms || !$request->user()->hasPermissionTo($perms)){
+            if (! $perms || ! $request->user()->hasPermissionTo($perms)) {
                 abort(403);
             }
         }
