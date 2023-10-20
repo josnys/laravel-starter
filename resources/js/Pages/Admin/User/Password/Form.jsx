@@ -4,8 +4,6 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import TextAreaInput from '@/Components/TextAreaInput';
-import Checkbox from '@/Components/Checkbox';
 import FlashMessage from '@/Components/FlashMessage';
 import CancelButton from '@/Components/CancelButton';
 
