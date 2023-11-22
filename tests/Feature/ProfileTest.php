@@ -7,7 +7,7 @@ use function Pest\Laravel\{ actingAs, assertGuest };
 test('profile page is displayed', function () {
     $user = createUser();
 
-    $response = actingAs($user)->get('/user/profile');
+    $response = actingAs(authUser($user))->get('/user/profile');
 
     $response->assertOk();
 });
@@ -17,7 +17,7 @@ test('profile information can be updated', function () {
     $username = 'my_new_username'; // fake()->userName();
     $email = fake()->email();
 
-    $response = actingAs($user)
+    $response = actingAs(authUser($user))
         ->patch('/user/profile', [
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
@@ -41,7 +41,7 @@ test('profile information can be updated', function () {
 test('email verification status is unchanged when the email address is unchanged', function () {
     $user = createUser();
 
-    $response = actingAs($user)
+    $response = actingAs(authUser($user))
         ->patch('/user/profile', [
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
@@ -62,7 +62,7 @@ test('email verification status is unchanged when the email address is unchanged
 test('user can delete their account', function () {
     $user = createUser();
 
-    $response = actingAs($user)
+    $response = actingAs(authUser($user))
         ->delete('/user/profile', [
             'password' => 'password',
         ]);
@@ -80,7 +80,7 @@ test('user can delete their account', function () {
 test('correct password must be provided to delete account', function () {
     $user = createUser();
 
-    $response = actingAs($user)
+    $response = actingAs(authUser($user))
         ->from('/user/profile')
         ->delete('/user/profile', [
             'password' => 'wrong-password',
